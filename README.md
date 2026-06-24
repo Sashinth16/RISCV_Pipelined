@@ -30,10 +30,10 @@ Built as a flagship project for CDC internship placements.
 - [x] cpu_singlecycle
 
 ### Stage 4 — Pipeline
-- [ ] if_id_reg
-- [ ] id_ex_reg
-- [ ] ex_mem_reg
-- [ ] mem_wb_reg
+- [x] if_id_reg
+- [x] id_ex_reg
+- [x] ex_mem_reg
+- [x] mem_wb_reg
 - [ ] hazard_unit
 - [ ] forwarding_unit
 - [ ] branch_predictor
