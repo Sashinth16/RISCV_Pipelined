@@ -1,0 +1,55 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 24.06.2026 09:14:22
+// Design Name: 
+// Module Name: ex_mem_reg
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module ex_mem_reg(
+    input         clk, rst, flush,
+    input  [31:0] alu_result_in, rd2_in, pc_in,
+    input  [4:0]  rd_in,
+    input         zero_in, mem_read_in, mem_write_in,
+                  mem_to_reg_in, reg_write_in, branch_in,
+    output reg [31:0] alu_result_out, rd2_out, pc_out,
+    output reg [4:0]  rd_out,
+    output reg        zero_out, mem_read_out, mem_write_out,
+                      mem_to_reg_out, reg_write_out, branch_out
+);
+    always @(posedge clk) begin
+        if (rst | flush) begin
+            alu_result_out <= 0; rd2_out       <= 0;
+            pc_out         <= 0; rd_out         <= 0;
+            zero_out       <= 0; mem_read_out   <= 0;
+            mem_write_out  <= 0; mem_to_reg_out <= 0;
+            reg_write_out  <= 0; branch_out     <= 0;
+        end
+        else begin
+            alu_result_out <= alu_result_in;
+            rd2_out        <= rd2_in;
+            pc_out         <= pc_in;
+            rd_out         <= rd_in;
+            zero_out       <= zero_in;
+            mem_read_out   <= mem_read_in;
+            mem_write_out  <= mem_write_in;
+            mem_to_reg_out <= mem_to_reg_in;
+            reg_write_out  <= reg_write_in;
+            branch_out     <= branch_in;
+        end
+    end
+endmodule
