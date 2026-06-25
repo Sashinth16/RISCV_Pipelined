@@ -34,14 +34,14 @@ Built as a flagship project for CDC internship placements.
 - [x] id_ex_reg
 - [x] ex_mem_reg
 - [x] mem_wb_reg
-- [ ] hazard_unit
-- [ ] forwarding_unit
-- [ ] branch_predictor
-- [ ] cpu_pipelined
+- [x] hazard_unit
+- [x] forwarding_unit
+- [x] branch_predictor
+- [x] cpu_pipelined
 
 ### Stage 5 — Measurement + Silicon
-- [ ] perf_counters
-- [ ] Vivado synthesis report
+- [x] perf_counters
+- [x] Vivado synthesis report
 - [ ] OpenLane ASIC flow → GDS
 
 ## Architecture
