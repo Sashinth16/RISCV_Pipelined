@@ -1,0 +1,114 @@
+Synthesis Report
+Tool:           Vivado v2025.2
+Target Device:  Xilinx Artix-7 xc7a35tcpg236-1
+Speed Grade:    -1
+Design:         cpu_pipelined
+Synthesis:      0 errors, 0 critical warnings, 43 warnings
+
+Utilization (Post-Synthesis)
+Slice LUTs:         185  / 20,800   (0.89%)
+  LUT as Logic:     137  / 20,800   (0.66%)
+  LUT as Memory:     48  /  9,600   (0.50%)
+Slice Registers:    180  / 41,600   (0.43%)
+  Flip Flops:       180  / 41,600   (0.43%)
+Block RAM:            0  /     50   (0.00%)
+DSPs:                 0  /     90   (0.00%)
+Bonded IOB:          67  /    106   (63.21%)
+Clock Buffers:        1  /     32   (3.13%)
+
+RTL Component Statistics
+32-bit Adders:    4  (3× two-input, 1× three-input)
+32-bit XORs:      1
+32-bit Registers: 12
+5-bit Registers:   5
+3-bit Registers:   1
+1-bit Registers:  14
+32-bit Muxes:     12 (5-input×1, 4-input×1, 3-input×2, 2-input×8)
+2-bit Muxes:       2
+
+Per-Module Cell Count
+Total cells:     450
+id_ex_reg:       113
+mem_wb_reg:       73
+ex_mem_reg:       59
+pc:               44
+regfile:          46
+if_id_reg:        39
+alu:               8
+
+Primitive Mapping
+FDRE (Flip Flops):          180
+LUT6:                        85
+LUT4:                        38
+LUT2:                        37
+LUT5:                        10
+LUT1:                         2
+CARRY4 (adder carry chain):  16
+RAMD32 (distributed RAM):    68
+RAMS32 (distributed RAM):    20
+OBUF (output buffers):       65
+IBUF (input buffers):         2
+BUFG (global clock buffer):   1
+
+Register File Inference
+Type:       Distributed RAM
+Primitive:  RAM32M × 10 + RAM32X1D × 4
+Size:       32 × 32-bit
+Total:      14 RAM primitives
+
+Timing Report (Post-Route)
+WNS:                     inf  (no clock constraint defined)
+TNS:                   0.000 ns
+Failing Endpoints:         0
+Total Endpoints:         756
+Hold Slack (WHS):        inf
+Hold Failing:              0
+Timing Violations:         0
+
+Longest data path:     7.634 ns  (PC reg → output buffer)
+Shortest data path:    0.220 ns  (EX/MEM → MEM/WB register)
+Estimated Fmax:        ~131 MHz  (1 / 7.634ns)
+
+Critical path breakdown:
+  FDRE propagation:    0.456 ns
+  Routing:             4.574 ns
+  OBUF:                2.604 ns
+  Total:               7.634 ns
+
+Performance Counter Simulation Output
+Cycles elapsed:          10
+Instructions completed:   5  (NOPs excluded)
+Stall cycles:             2
+CPI at cycle 2:        1.00  (cpi_x100 = 100)
+CPI during stalls:     1.33  (cpi_x100 = 133)
+CPI during stalls:     1.66  (cpi_x100 = 166)
+CPI final settling:    1.80  (cpi_x100 = 180)
+Stall overhead:        20%   (2 stalls / 10 cycles)
+
+Pipelined CPU Simulation Output
+Pipeline latency:        4 cycles (5-stage pipeline fill time)
+Instruction 1 WB time:  45ns  (ADDI x1,x0,5  → result=0x00000005)
+Instruction 2 WB time:  55ns  (ADDI x2,x0,10 → result=0x0000000a)
+Instruction 3 WB time:  65ns  (ADD  x3,x1,x2 → result=0x0000000f)
+Writeback interval:      10ns per instruction (1 per cycle)
+Forwarding confirmed:    x1=5, x2=10 forwarded correctly to ADD
+ADD result:              15 = 5 + 10 ✅
+
+Single-Cycle CPU Simulation Output
+Cycle 1: pc=0x00000000  instr=0x00500093  alu_result=0x00000005
+Cycle 2: pc=0x00000004  instr=0x00a00113  alu_result=0x0000000a
+Cycle 3: pc=0x00000008  instr=0x002081b3  alu_result=0x0000000f
+Cycle 4: pc=0x0000000c  instr=0x00000013  alu_result=0x00000000
+PC increment per cycle: 4 bytes ✅
+
+Project Scale
+Total Verilog modules:    22
+Total testbenches:        22
+GitHub commits:           ongoing
+Lines of RTL (approx):   ~600
+Supported instructions:   5 (ADD, ADDI, LW, SW, BEQ)
+ALU operations:           6 (ADD, SUB, AND, OR, XOR, SLT)
+Register file:            32 × 32-bit
+Pipeline stages:          5 (IF, ID, EX, MEM, WB)
+Hazard handling:          Load-use stall + full data forwarding
+Branch handling:          Static not-taken predictor
